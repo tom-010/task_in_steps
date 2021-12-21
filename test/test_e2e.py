@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from step_by_step.step_by_step import Step, run_steps
+from task_in_steps.task_in_steps import Step, run_steps
 
 expected_e2e_output = '''
 === MyStep ==================

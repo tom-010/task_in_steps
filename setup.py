@@ -7,12 +7,12 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 setup(
-    name='step_by_step',
-    url='https://github.com/tom-010/step_by_step',
+    name='task_in_steps',
+    url='https://github.com/tom-010/task_in_steps',
     version='0.0.1',
     author='Thomas Deniffel',
     author_email='tdeniffel@gmail.com',
-    packages=['step_by_step'], # find_packages(),
+    packages=['task_in_steps'], # find_packages(),
     license='Apache2',
     install_requires=[
     ],

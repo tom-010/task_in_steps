@@ -1,5 +1,5 @@
-step_by_step
-============
+task_in_steps
+=============
 
 Many python-automation scripts can be seperated into steps. 
 This library supports this seperation. You can define steps 
