@@ -7,26 +7,46 @@ class Step:
     def can_skip(self, config):
         return False
 
+    ## 
+
+    def __init__(self, outputter=None):
+        self.print = outputter or print
+
     def __call__(self, config):
-        name = self.name if hasattr(self, 'name') else self.__name__
-        print()
-        print(f'=== {name} ==================')
+        self._print_opening(self._my_name)
+        status, res = self._execute(config)
+        self._print_closing(self._my_name, status)
+        return res
+    
+    ## 
+
+    def _execute(self, config):
+        status = 'done'
         res = True
-        message = 'done'
         if not self.can_skip(config):
             res = self.run(config)
-            message = 'ok' if res else 'error'
+            status = 'ok' if res else 'error'
+        return status, res
 
-        print(f'----{"-" * len(name)}-------------------')
+    
 
-        print(message)
+    def _print_opening(self, name):
+        self.print()
+        self.print(f'=== {name} ==================')
 
-        print(f'===={"=" * len(name)}===================')
-        print()
-        return res
+    def _print_closing(self, name, status):
+        self.print(f'----{"-" * len(name)}-------------------')
+        self.print(status)
+        self.print(f'===={"=" * len(name)}===================')
+        self.print()
+
+    @property
+    def _my_name(self):
+        return self.name if hasattr(self, 'name') else self.__class__.__name__
 
 def run_steps(config, steps):
     for step in steps:
         res = step(config)
         if not res:
-            exit(1)
+            return False
+    return True
